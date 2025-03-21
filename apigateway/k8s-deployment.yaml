@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: microser-gateway
+spec:
+  selector:
+    matchLabels:
+      app: microser-gateway
+  replicas: 1 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: microser-gateway
+    spec:
+      containers:
+        - name: microser-gateway
+          image: microser-gateway:1.0.0 # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8083 # The port that the container is running on in the cluster

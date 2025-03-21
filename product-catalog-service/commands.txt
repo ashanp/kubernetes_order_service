@@ -1,0 +1,18 @@
+first we create the docker image
+<cmd>docker build -t product-catalog-service:1.0.0 .
+this will create the docker image
+to check if the image is created use
+<cmd>docker images
+
+now you create the kuberneted deployment yaml.
+once done you will have to create a kubernetes resource using below command
+<cmd>kubectl apply -f k8s-deployment.yaml
+to verify use below command
+<cmd>kubectl get deployments
+this will show the number of pods running as well
+
+in kubernetes, we see above 2 pods created. but how can we consume this service ? how do we know which pod instance will be called? for this we need to create a kind of load balancer michanism. in order to cater this, kubernetes provide a compoment called "Service". This service actes as a "service dicovery" and also acts as a load balancer where it decides which pod should handle the request.
+In order to provide details of the "Service" we have to create a seperate service yaml in your spring application (same like the deployment yaml)
+after creating the service yaml file user below comman
+<cmd>kubectl apply -f k8s-service.yaml
+
