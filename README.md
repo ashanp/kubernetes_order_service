@@ -2,6 +2,53 @@
 
 This is a simple order application that consists of the following four services:
 
+## 1️⃣ Postgres Database Service
+
+### 📂 Structure
+- **Docker File**
+- **Kubernetes Deployment, Service, and Ingress Configuration YAML Files**
+
+### 🚀 Commands
+#### 🏗 Docker Build Command
+```sh
+docker build -t postgres-db:1.0.0 .
+```
+- This will build an image and store it in the Docker image registry.
+
+#### ⚙️ Kubernetes Commands
+```sh
+# Navigate to the project home directory where the YAML files are located
+kubectl apply -f Postgre-pvc.yaml
+kubectl apply -f Postgres-deployment.yaml
+kubectl apply -f Postgres-service.yaml
+kubectl apply -f Postgres-ingres.yaml
+```
+
+#### ⚙️ Access database 
+```sh
+for outside cluster using pgadmin try to connect to database
+          env:
+            - name: POSTGRES_USER
+              value: "admin"
+            - name: POSTGRES_PASSWORD
+              value: "admin123"
+            - name: POSTGRES_DB
+              value: "mydatabase"
+for accessing the database within the cluster 
+```
+
+#### ⚙️ Table and Data scripts 
+```sh
+Inventory Service
+
+Product Catalog Service
+
+Order Service
+
+```
+
+
+
 ## 1️⃣ Inventory Service
 
 ### 📂 Structure
