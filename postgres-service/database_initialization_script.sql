@@ -5,7 +5,7 @@ CREATE DATABASE product;
 CREATE USER productuser WITH ENCRYPTED PASSWORD 'myproduct';
 
 -- Grant all privileges on the database to the user
-GRANT ALL PRIVILEGES ON DATABASE productuser TO myuser;
+GRANT ALL PRIVILEGES ON DATABASE product TO productuser;
 
 -- Connect to the newly created database
 \c productuser;
@@ -20,6 +20,9 @@ CREATE TABLE product (
     description VARCHAR(255),
     price DOUBLE PRECISION NOT NULL
 );
+
+-- when creating Auto-incrementing automatically a sequence gets created at the time of table creation
+GRANT ALL PRIVILEGES ON SEQUENCE product_id_seq TO public;
 
 -- Grant all privileges on the table to the user
 GRANT ALL PRIVILEGES ON TABLE product TO productuser;
@@ -53,9 +56,12 @@ GRANT ALL ON SCHEMA public TO inventoryuser;
 
 -- Create a table
 CREATE TABLE inventory (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY, -- Auto-incrementing ID
     quantity INT
 );
+
+-- when creating Auto-incrementing automatically a sequence gets created at the time of table creation
+GRANT ALL PRIVILEGES ON SEQUENCE inventory_id_seq TO public;
 
 -- Grant all privileges on the table to the user
 GRANT ALL PRIVILEGES ON TABLE inventory TO inventoryuser;
@@ -89,11 +95,14 @@ GRANT ALL ON SCHEMA public TO ordersuser;
 
 -- Create a table
 CREATE TABLE orders (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY, -- Auto-incrementing ID
     product_id BIGINT,
     quantity INT,
     total_price DOUBLE PRECISION  NOT NULL
 );
+
+-- when creating Auto-incrementing automatically a sequence gets created at the time of table creation
+GRANT ALL PRIVILEGES ON SEQUENCE orders_id_seq TO public;
 
 -- Grant all privileges on the table to the user
 GRANT ALL PRIVILEGES ON TABLE orders TO ordersuser;
